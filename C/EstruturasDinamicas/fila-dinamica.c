@@ -58,6 +58,7 @@ void remover() {
         return;
     }
 
+    // Cria um ponteiro que aponta para o atual início da fila, muda o início e libera a memória do antigo
     struct Fila *elemento = inicio;
     inicio = inicio->prox;
     free(elemento);
@@ -84,6 +85,7 @@ int main() {
             case 2: inserir(); break;
             case 3: remover(); break;
             case 4: break;
+            default: printf("\nOpção inválida");
         }
     }
 
