@@ -50,7 +50,47 @@ void inserir() {
     printf("\nO elemento foi adicionado ao fim da lista.");
 }
 
+// Busca um valor na lista e remove a primeira ocorrência encontrada
 void remover() {
+
+    if (inicio == NULL) {
+        printf("\nA lista está vazia, não é possível remover.");
+        return;
+    }
+
+    // Define o valor que será buscado
+    int alvo;
+    printf("\nDigite o valor que será removido: ");
+    scanf("%d", &alvo);
+
+    // Percorre cada elemento da lista
+    // (Em cada execução, atualiza o elemento atual para o próximo e guarda uma referência ao anterior)
+    // (A execução é interrompida caso o elemento seja encontrado ou todos os elementos sejam percorridos)
+    struct Lista *elemento = inicio, *anterior = NULL;
+    while (elemento != NULL && elemento->valor != alvo) {
+        anterior = elemento;
+        elemento = elemento->prox;
+    }
+    
+    // Se o último elemento percorrido for NULL, o valor alvo não foi encontrado
+    if (elemento == NULL) {
+        printf("\nO valor não corresponde a nenhum elemento na lista, nenhum elemento foi removido.");
+        return;
+    }
+
+    // Se o elemento anterior for NULL, o elemento foi encontrado e era o primeiro da lista
+    if (anterior == NULL) {
+        // Faz o início apontar para o próximo elemento
+        inicio = elemento->prox;
+    }
+    // Se havia um elemento anterior:
+    else {
+        // Faz o elemento anterior apontar o próximo do alvo como próximo
+        anterior->prox = elemento->prox;
+    }
+
+    free(elemento);
+    printf("\nO elemento foi removido da lista.");
 }
 
 int main() {
